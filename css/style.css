@@ -14,7 +14,7 @@
 .skeleton{
     display: grid;
     grid-template-columns: repeat(24, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(14, 1fr);
     justify-content: stretch;
     align-content: stretch;
 }
@@ -27,35 +27,46 @@
     filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg);
     transition: filter 0.3s ease;
     grid-column: 1/2;
-    grid-row: 1/4;
+    grid-row: 1/15;
     height: 100vh;
 }
 
 .music{
     grid-column: 2/13;
-    grid-row: 1/2;
+    grid-row: 1/5;
 }
 
 .weather{
     grid-column: 13/24;
-    grid-row: 1/2;
+    grid-row: 1/5;
 }
 
 .next{
     filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg);
     transition: filter 0.3s ease;
     grid-column: 24/25;
-    grid-row: 1/4;
+    grid-row: 1/15;
 }
 
 .time{
     grid-column: 2/24;
-    grid-row: 2/3;
+    grid-row: 5/12;
+    align-items: center;
+}
+
+.name{
+    background-color: transparent;
+    border: none;
+    font-size: 40px;
+}
+
+.name:focus{
+    outline: none;
 }
 
 .quote{
     grid-column: 2/24;
-    grid-row: 3/4;
+    grid-row: 12/15;
 }
 
 .next:hover {
