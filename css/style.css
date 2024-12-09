@@ -1,0 +1,67 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Barlow";
+}
+
+.background{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.skeleton{
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    justify-content: stretch;
+    align-content: stretch;
+}
+
+.skeleton div{
+    border:1px solid black;
+}
+
+.previous{
+    filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg);
+    transition: filter 0.3s ease;
+    grid-column: 1/2;
+    grid-row: 1/4;
+    height: 100vh;
+}
+
+.music{
+    grid-column: 2/13;
+    grid-row: 1/2;
+}
+
+.weather{
+    grid-column: 13/24;
+    grid-row: 1/2;
+}
+
+.next{
+    filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg);
+    transition: filter 0.3s ease;
+    grid-column: 24/25;
+    grid-row: 1/4;
+}
+
+.time{
+    grid-column: 2/24;
+    grid-row: 2/3;
+}
+
+.quote{
+    grid-column: 2/24;
+    grid-row: 3/4;
+}
+
+.next:hover {
+    filter: invert(40%) sepia(70%) saturate(200%) hue-rotate(180deg);
+}
+
+.previous:hover{
+    filter: invert(40%) sepia(70%) saturate(200%) hue-rotate(180deg);
+}
