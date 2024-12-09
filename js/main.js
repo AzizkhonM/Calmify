@@ -22,10 +22,12 @@ const days = [
     "Friday",
     "Saturday",
 ]
+
+let songElement = 0
 const apiUrl = 'https://api.api-ninjas.com/v1/quotes?category=life';
 const apiKey = 'mWyXPGB7qCnI18cKqSgdWg==QsSUMsfSEEPFKpmB';
 const ACCESS_KEY = "pmMyzaKHFoLUHPD0NrkksjzOT_hid10TQ64sILWAD4c";
-const url = `https://api.unsplash.com/search/photos?query=nature&orientation=landscape&per_page=25&client_id=${ACCESS_KEY}`;
+const url = `https://api.unsplash.com/search/photos?query=island&orientation=landscape&per_page=25&client_id=${ACCESS_KEY}`;
 const background = document.querySelector(".background")
 const previous = document.querySelector(".previous")
 const next = document.querySelector(".next")
@@ -131,4 +133,76 @@ quoteGenerator()
 
 change.addEventListener("click", () => {
     quoteGenerator()
+})
+
+function player(){
+    document.querySelector("audio").src = `../music/${musicData[element].audio}.mp3`
+    console.log(musicData[element].class);
+    setTimeout(() => {
+        document.querySelector(`#${musicData[element].class}`).style.fontWeight = "bold"
+    }, 100);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const audio = document.querySelector("audio");
+    const previousMusic = document.querySelector(".previousMusic")
+    const playPauseMusic = document.querySelector(".playPauseMusic")
+    const nextMusic = document.querySelector(".nextMusic")
+
+    playPauseMusic.addEventListener("click", () => {
+        if (audio.paused) {
+            audio.play();
+            playPauseMusic.src = "/img/music/pause.svg"
+            playPauseMusic.style.width = "29px"
+        } else {
+            audio.pause();
+            playPauseMusic.src = "/img/music/play.svg"
+            playPauseMusic.style.width = "30px"
+        }
+    });
+
+    previousMusic.addEventListener("click", () => {
+        document.querySelector(`#${musicData[element].class}`).style.fontWeight = "normal"
+        if(element == 0){
+            element = musicData.length - 1
+        } else{
+            element--
+        }
+        player()
+        audio.play()
+        playPauseMusic.src = "/img/music/pause.svg"
+        playPauseMusic.style.width = "29px"
+    })
+
+    nextMusic.addEventListener("click", () => {
+        document.querySelector(`#${musicData[element].class}`).style.fontWeight = "normal"
+        if(element == musicData.length - 1){
+            element = 0
+        } else{
+            element++
+        }
+        player()
+        audio.play()
+        playPauseMusic.src = "/img/music/pause.svg"
+        playPauseMusic.style.width = "29px"
+    })
+
+});
+
+fetch("../data/data.json").then(r=>r.text()).then(text => {
+    musicData = JSON.parse(text)
+    player()
+    console.log(musicData);
+    
+    const tracklist = document.querySelector(".tracklist")
+    console.log(tracklist);
+    
+    for(let i of musicData){
+        console.log(i);
+        let h1 = document.createElement("h1")
+        h1.setAttribute("id", i.class)
+        h1.setAttribute("class", "track_info")
+        h1.innerHTML = i.name
+        tracklist.appendChild(h1)
+    }
 })

@@ -33,12 +33,12 @@
 
 .music{
     grid-column: 2/13;
-    grid-row: 1/5;
+    grid-row: 1/6;
 }
 
 .weather{
     grid-column: 13/24;
-    grid-row: 1/5;
+    grid-row: 1/6;
 }
 
 .next{
@@ -50,7 +50,7 @@
 
 .time{
     grid-column: 2/24;
-    grid-row: 5/12;
+    grid-row: 6/12;
     align-items: center;
 }
 

@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "class": "end",
+        "name": "Djo — End of Beginning",
+        "audio": "End_of_Beginning"
+    },
+    {
+        "id": 2,
+        "class": "res",
+        "name": "Home — Resonance",
+        "audio": "Resonance"
+    },
+    {
+        "id": 3,
+        "class": "cha",
+        "name": "Mac DeMarco — Chamber Of Reflection",
+        "audio": "Chamber_Of_Reflection"
+    },
+    {
+        "id": 4,
+        "class": "aqu",
+        "name": "Scizzie - aquatic ambience",
+        "audio": "Aquatic_Ambience"
+    },
+    {
+        "id": 5,
+        "class": "bor",
+        "name": "Tame Impala — Borderline",
+        "audio": "Borderline"
+    },
+    {
+        "id": 6,
+        "class": "ife",
+        "name": "The Weeknd — I Feel It Coming",
+        "audio": "I_Feel_It_Coming"
+    },
+    {
+        "id": 7,
+        "class": "mem",
+        "name": "VØJ, Narvent — Memory Reboot",
+        "audio": "Memory_Reboot"
+    }
+]
