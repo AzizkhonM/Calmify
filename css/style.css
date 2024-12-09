@@ -69,10 +69,16 @@
     grid-row: 12/15;
 }
 
-.next:hover {
+.next:hover, .previous:hover{
     filter: invert(40%) sepia(70%) saturate(200%) hue-rotate(180deg);
 }
 
-.previous:hover{
+#change{
+    filter: invert(1) grayscale(100%) contrast(100%);
+    transition: filter 0.3s ease;
+}
+
+#change:hover{
     filter: invert(40%) sepia(70%) saturate(200%) hue-rotate(180deg);
+
 }

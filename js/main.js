@@ -22,7 +22,8 @@ const days = [
     "Friday",
     "Saturday",
 ]
-
+const apiUrl = 'https://api.api-ninjas.com/v1/quotes?category=life';
+const apiKey = 'mWyXPGB7qCnI18cKqSgdWg==QsSUMsfSEEPFKpmB';
 const ACCESS_KEY = "pmMyzaKHFoLUHPD0NrkksjzOT_hid10TQ64sILWAD4c";
 const url = `https://api.unsplash.com/search/photos?query=nature&orientation=landscape&per_page=25&client_id=${ACCESS_KEY}`;
 const background = document.querySelector(".background")
@@ -102,4 +103,32 @@ next.addEventListener("click", () => {
         element++
         background.style.backgroundImage = `url(${backgroundImages[element].imgUrl})`
     }
+})
+
+const author = document.querySelector(".author")
+const quoteText = document.querySelector(".quoteText")
+const change = document.querySelector("#change")
+
+function quoteGenerator(){
+    /* fetch(apiUrl, {
+    method: 'GET',
+    headers: {
+        'X-Api-Key': apiKey
+    }
+})
+.then(response => response.json())
+.then(data => {
+    console.log(data);
+        author.innerHTML = data[0].author
+        quoteText.innerHTML = data[0].quote
+})
+.catch(error => console.error('Error fetching quotes:', error));
+*/
+console.log("Quote");
+}
+
+quoteGenerator()
+
+change.addEventListener("click", () => {
+    quoteGenerator()
 })
