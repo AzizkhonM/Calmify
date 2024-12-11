@@ -27,7 +27,7 @@ let songElement = 0
 const apiUrl = 'https://api.api-ninjas.com/v1/quotes?category=life';
 const apiKey = 'mWyXPGB7qCnI18cKqSgdWg==QsSUMsfSEEPFKpmB';
 const ACCESS_KEY = "pmMyzaKHFoLUHPD0NrkksjzOT_hid10TQ64sILWAD4c";
-const url = `https://api.unsplash.com/search/photos?query=island&orientation=landscape&per_page=25&client_id=${ACCESS_KEY}`;
+const url = `https://api.unsplash.com/search/photos?query=mountain&orientation=landscape&per_page=25&client_id=${ACCESS_KEY}`;
 const background = document.querySelector(".background")
 const previous = document.querySelector(".previous")
 const next = document.querySelector(".next")
@@ -112,7 +112,7 @@ const quoteText = document.querySelector(".quoteText")
 const change = document.querySelector("#change")
 
 function quoteGenerator(){
-    /* fetch(apiUrl, {
+    fetch(apiUrl, {
     method: 'GET',
     headers: {
         'X-Api-Key': apiKey
@@ -125,8 +125,6 @@ function quoteGenerator(){
         quoteText.innerHTML = data[0].quote
 })
 .catch(error => console.error('Error fetching quotes:', error));
-*/
-console.log("Quote");
 }
 
 quoteGenerator()
@@ -136,10 +134,10 @@ change.addEventListener("click", () => {
 })
 
 function player(){
-    document.querySelector("audio").src = `../music/${musicData[element].audio}.mp3`
-    console.log(musicData[element].class);
+    document.querySelector("audio").src = `../music/${musicData[songElement].audio}.mp3`
+    console.log(musicData[songElement].class);
     setTimeout(() => {
-        document.querySelector(`#${musicData[element].class}`).style.fontWeight = "bold"
+        document.querySelector(`#${musicData[songElement].class}`).style.fontWeight = "bold"
     }, 100);
 }
 
@@ -162,11 +160,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     previousMusic.addEventListener("click", () => {
-        document.querySelector(`#${musicData[element].class}`).style.fontWeight = "normal"
-        if(element == 0){
-            element = musicData.length - 1
+        document.querySelector(`#${musicData[songElement].class}`).style.fontWeight = "normal"
+        if(songElement == 0){
+            songElement = musicData.length - 1
         } else{
-            element--
+            songElement--
         }
         player()
         audio.play()
@@ -175,17 +173,40 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     nextMusic.addEventListener("click", () => {
-        document.querySelector(`#${musicData[element].class}`).style.fontWeight = "normal"
-        if(element == musicData.length - 1){
-            element = 0
+        document.querySelector(`#${musicData[songElement].class}`).style.fontWeight = "normal"
+        if(songElement == musicData.length - 1){
+            songElement = 0
         } else{
-            element++
+            songElement++
         }
         player()
         audio.play()
         playPauseMusic.src = "/img/music/pause.svg"
         playPauseMusic.style.width = "29px"
     })
+
+    audio.addEventListener("timeupdate", () => {
+        const currentTime = audio.currentTime;
+        const duration = audio.duration;
+      
+        // Calculate progress percentage
+        const progressPercent = (currentTime / duration) * 100;
+        console.log(currentTime);
+    
+        if(progressPercent == 100){
+            document.querySelector(`#${musicData[songElement].class}`).style.fontWeight = "normal"
+            if(songElement == musicData.length - 1){
+                songElement = 0
+            } else{
+                songElement++
+            }
+            player()
+            audio.play()
+            playPauseMusic.src = "/img/music/pause.svg"
+            playPauseMusic.style.width = "29px"
+        }
+        
+      });
 
 });
 
@@ -206,3 +227,28 @@ fetch("../data/data.json").then(r=>r.text()).then(text => {
         tracklist.appendChild(h1)
     }
 })
+
+async function weatherFetch(a){
+    console.log(a.toLowerCase());
+    const apiKey = '2b865708de8b4d0d82d123942231406'; // Replace with your WeatherAPI key
+    const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${a}`;
+    const weatherImg = document.querySelector("#weatherImg")
+    const condition = document.querySelector("#condition")
+    const wind = document.querySelector("#wind")
+    const humidity = document.querySelector("#humidity")
+
+    try {
+        const response = await fetch(apiUrl);
+        const weatherData = await response.json();
+        console.log(weatherData.current);
+        weatherImg.src = weatherData.current.condition.icon
+        weatherImg.style.float = "right"
+        weatherImg.style.textAlign = "right"
+        condition.innerHTML = `${Number(String(weatherData.current.temp_c).split(".")[0])}°C, ${(weatherData.current.condition.text).toLowerCase()}`
+        wind.innerHTML = `Wind Speed: ${weatherData.current.wind_kph} km/h`
+        humidity.innerHTML = `Humidity: ${weatherData.current.humidity}%`
+        return weatherData;
+    } catch (error) {
+        console.error("Failed to fetch weather data:", error.message);
+    }
+}
